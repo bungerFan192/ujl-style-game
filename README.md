@@ -5,4 +5,9 @@ download the .sb3 and chart in the [ujl-vc-gen](https://gamebanana.com/tools/132
 
 # Controls
 
-Z: (X); X: (O); A: (□); S: (△); K: (R); J: (L);
+Z: (X);
+X: (O);
+A: (□);
+S: (△);
+K: (R);
+J: (L);
