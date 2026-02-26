@@ -190,14 +190,25 @@ jobs:
 
           if [ "$PROJECT_TYPE" = "flutter" ]; then
             cd ..
-            if [ "$CONFIGURATION" = "Debug" ]; then
-              echo "Building Flutter iOS Debug..."
-              flutter build ios --debug --no-codesign
-            else
-              echo "Building Flutter iOS Release..."
-              flutter build ios --release --no-codesign
-            fi
+            echo "Building Flutter iOS ($CONFIGURATION) using xcodebuild..."
+            flutter build ios --config-only --${CONFIGURATION,,} --no-codesign
             cd "$IOS_PATH"
+
+            WORKSPACE=$(find . -maxdepth 1 -name "*.xcworkspace" | head -1)
+            if [ -z "$WORKSPACE" ]; then
+              echo "Error: Could not find xcworkspace in $IOS_PATH"
+              exit 1
+            fi
+
+            xcodebuild \
+              -workspace "$WORKSPACE" \
+              -scheme Runner \
+              -configuration "$CONFIGURATION" \
+              -destination 'generic/platform=iOS' \
+              -derivedDataPath "$DERIVED_DATA_PATH" \
+              CODE_SIGNING_ALLOWED=NO \
+              COMPILER_INDEX_STORE_ENABLE=NO \
+              -quiet build
           elif [ "$PROJECT_TYPE" = "reactnative" ] || [ "$PROJECT_TYPE" = "expo" ]; then
             # Use xcodebuild directly for React Native/Expo
             echo "Building React Native iOS ($CONFIGURATION)..."
@@ -286,8 +297,8 @@ jobs:
           else
             # For unsigned builds, find .app and create IPA
             if [ "$PROJECT_TYPE" = "flutter" ]; then
-              # Flutter outputs to build/ios/iphoneos/
-              APP_PATH=$(find "${GITHUB_WORKSPACE}/build/ios/iphoneos" -name "*.app" -type d | head -1)
+              # Flutter built via xcodebuild uses DerivedData
+              APP_PATH=$(find "$DERIVED_DATA_PATH/Build/Products/${CONFIGURATION}-iphoneos" -name "*.app" -type d | head -1)
             else
               # Native and React Native/Expo use DerivedData
               APP_PATH=$(find "$DERIVED_DATA_PATH/Build/Products/${CONFIGURATION}-iphoneos" -name "*.app" -type d | head -1)
