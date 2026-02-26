@@ -5,10 +5,10 @@ download the .sb3 and chart in the [ujl-vc-gen](https://gamebanana.com/tools/132
 
 # Controls
 
-## If on mobile, use the buttons on-screen!<br>
 Z: (X);<br>
 X: (O);<br>
 A: (□);<br>
 S: (△);<br>
 K: (R);<br>
 J: (L);<br>
+### If on mobile, use the buttons on-screen!<br>
