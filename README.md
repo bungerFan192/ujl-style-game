@@ -11,3 +11,4 @@ A: (□);<br>
 S: (△);<br>
 K: (R);<br>
 J: (L);<br>
+### If on mobile, use the buttons on-screen!<br>
