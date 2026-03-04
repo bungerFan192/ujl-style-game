@@ -1,6 +1,6 @@
-# (Um Jammer Lammy) Style Engine
+# (Um Jammer Lammy) Style Engine (a.k.a. Rapping Dog drives a car PLAYABLE)
 
-Only for use in [TurboWarp](https://turbowarp.org)! I have not tested it in other scratch mods.<br>
+Only for use in [PenguinMod](https://turbowarp.org)! I have not tested it in other scratch mods.<br>
 download the .sb3 and chart in the [ujl-vc-gen](https://gamebanana.com/tools/13279) which also makes official UJL charts!
 
 # Controls
